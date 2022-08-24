@@ -1,0 +1,134 @@
+SOLID
+
+Possui cinco princípios para a boa prática da programação e da P.O.O.:
+
+[S]ingle Responsibility Principle (Princípio da Responsabilidade Única)
+[O]pen/Closed Principle (Princípio do Aberto/Fechado)
+[L]iskov Substitution Principle (Princípio da Substituição de Liskov)
+[I]nterface Segregation Principle (Princípio da Segregação de Interfaces)
+[D]ependency Inversion Principle (Princípio da Inversão de Dependências)
+
+Um código fácil de manter e de estender (adicionar novas funcionalidades) com o menor
+impacto possível.
+
+Princípios do SOLID:
+
+1) Single Responsibility Principle: significa dizer que uma classe deve ter
+apenas uma única responsabilidade bem definida. Só porque é possível ter o 
+sistema inteiro escrito em uma classe, não significa que deveríamos fazer 
+isso (isso torna a classe muito frágil). Classes com menos 
+responsabilidades facilita muito o processo de manutenção. 
+
+"Uma classe deveria ter apenas um único motivo para mudar".
+
+Esse princípio está ligado diretamente ao princípio da coesão, tornando
+as classes mais enxutas e claras. 
+
+2) Open Closed Principle: este princípio diz que não é necessário expor 
+os detalhes dos meus componentes para adicionar novas funcionalidades. Ao
+invés de, a cada nova regra de negócio e validação, mexer e adicionar 
+detalhes à mesma classe, é possível extrair utilizando outros conceitos
+da P.O.O., como interfaces e polimorfismo. Isso torna a classe extensível e
+flexível.
+
+Isso significa que devemos poder criar novas funcionalidades e estender o 
+sistema sem precisar modificar muitas classes já existentes. Uma classe que 
+tende a crescer "para sempre" é uma forte candidata a sofrer alguma espécie 
+de refatoração.
+
+Mexer no código de uma classe existente não é recomendado. É perigoso, pois
+pode causar erros ao que já existia. Quanto menos pudermos mexer em 
+uma classe, melhor. O design do código deve ser feito de maneira a sempre
+torná-lo extensível, não totalmente fechado a mudanças. Para isso, é
+necessário garantir que cada ação/responsabilidade esteja na classe 
+correta. Cada classe deve conhecer e ser responsável por suas próprias 
+regras de negócio.
+
+"Entidades de software (classes, módulos, funções, etc.) devem estar 
+abertas para extensão, porém fechadas para modificação".
+
+Quando for para modificar uma regra já existente, o código deve ser 
+modificado. Agora, se for para adicionar novas características, o mesmo
+não é recomendado. 
+
+3) Liskov Substitution Principle: quando utilizamos herança, é preciso tomar
+cuidado para não ferir este princípio. Quando usamos herança de maneira 
+errada, obtemos comportamentos inesperados. Algo que é parecido com outro
+não é necessariamente a mesma coisa. 
+
+"Se q(x) é uma propriedade demonstrável dos objetos x de tipo T, então
+q(y) deve ser verdadeiro para objetos y de tipo S, onde S é um subtipo de 
+T".
+
+Esse princípio dita que, quando temos uma classe Filha que herda da classe
+Mãe, se a classe Mãe for substituída pela classe Filha em algum momento
+e isso gerar um comportamento ou um efeito colateral inesperado, significa
+que o princípio da herança está sendo utilizado de maneira errada.
+
+Em outras palavras, devemos poder substituir classes base por suas classes 
+derivadas em qualquer lugar, sem problema.
+
+Exemplo:
+
+q(x) é a função promover que recebe objetos do tipo Funcionario com isso, ela
+terá um comportamento.
+
+Se for passado a ela um objeto que herda de Funcionario, não deveria haver
+um efeito colateral. O problema estava em que tentamos passar um Terceirizado,
+que não é exatamente um Funcionario, apesar de ser similar, e não deveria ter
+sido promovido. Isso gera, eventualmente, uma inconsistência na aplicação
+e dificuldades de manutenção.
+
+O recomendado é que se priorize a técnica de composição em lugar de herança.
+
+4) Interface Segregation Principle: esse princípio diz que às vezes um
+programador será obrigado a implementar uma interface que não faz sentido
+pra ele.
+
+"Uma classe não deveria ser obrigada a depender de métodos que não utilizará."
+
+Em outras palavras: uma classe não deve ser obrigada a implementar um método 
+de determinada interface, se ele não será útil. Para isso, uma interface 
+deverá ser extraída apenas com os métodos necessários.
+
+Interfaces devem definir apenas os métodos que fazem sentido para seu 
+contexto.
+
+5) Dependency Inversion Principle: este princípio diz que "abstrações não 
+devem depender de implementações. Implementações devem depender de 
+abstrações".
+
+É mais interessante e mais seguro para o nosso código depender de interfaces 
+(classes abstratas, assinaturas de métodos e interfaces em si) do que das 
+implementações de uma classe, pois as interfaces são menos propensas a sofrer 
+mudanças enquanto implementações podem mudar a qualquer momento.
+
+Exemplo: em nossa aplicação, diversas classes implementam uma interface.
+A interface não implementa nada. 
+
+O que é um código limpo?
+
+Um código limpo é a composição de diversas características, como:
+
+- Legível
+
+Um código compreensivo possibilita a identificação de pontos que precisam ser 
+melhorados. Passamos mais tempo lendo código do que escrevendo então, quanto 
+mais fácil for ler o código menos esforço fazemos para entendê-lo.
+
+- Testável
+Devemos testar nossos código, pois isso vai dar-nos segurança para podermos 
+alterá-los. E garantir que os cenários que previmos estão de acordo com o 
+esperado.
+
+- Fácil de ser mantido
+Nosso código deve passivo de alteração tanto para adição de novas 
+funcionalidades, quanto para aumentar a legibilidade ou manutenibilidade.
+
+De uma forma bem resumida um código limpo é um código testável, fácil de 
+manter e de ler.
+
+Observação: programe voltado à interface e ao contrato do objeto (o que o 
+objeto faz) e não como ele faz aquilo. 
+
+Lei de Demeter

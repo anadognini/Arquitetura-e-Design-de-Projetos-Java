@@ -1,0 +1,128 @@
+O que são design patterns?
+
+São soluções comuns para um problema que é recorrente ao utilizar o paradigma
+da P.O.O. Eles foram introduzidos inicialmente neste livro Design Patters: 
+Elements of Reusable Object Oriented Software, escrito pela Gang of Four. É 
+nesse livro que focaremos durante o curso e nos padrões descritos nele.
+
+São mencionados 23 padrões recorrentes na comunidade que trabalhava orientada
+a objetos, divididos em 3 categorias: 
+
+- Criacionais: cujo foco é na construção de objetos / classes.
+- Estruturais: relacionados com a estrutura e a composição e a 
+maneira como os objetos / classes relacionam em si.
+- Comportamentais: são padrões focados na parte de métodos, estado e 
+interação entre seus objetos. 
+
+O objetivo deste curso é focar em padrões comportamentais, os principais, 
+mais usados e recorrentes:
+
+Strategy
+Chain of Responsibility
+Template Method
+State
+Command
+Observer
+
+- Strategy: sempre que temos um algoritmo (uma validação, cálculo ou seja lá
+qual for a regra) e ele varia de acordo com um determinado parâmetro, de
+acordo com determinado tipo de informação, gerando um código cheio de if...
+else.
+ 
+Para solucionar isso e eliminar essas verificações, o padrão Strategy é muito
+útil. Ao invés de essa informação ser uma Enum, uma String, pode ser uma
+classe separadamente, ou uma interface (para que possamos utilizar as
+vantagens do polimorfismo), classes abstratas.
+
+Assim, eliminaríamos essas verificações e cada classe teria sua implementação
+específica, teria a sua estratégia de cálculo específica.
+
+O objetivo do Strategy é deixar o código mais coeso, com cada classe tenha
+sua estratégia específica, sem se relacionar intimamente com a outra. A
+classe Calculadora também não conhece intimimante nenhuma das classes, pois
+ela faz uso da interface, que é uma abstração.
+
+Este padrão pode ser utilizado quando há diversos possíveis algoritmos para
+uma ação (como calcular imposto, por exemplo). Nele, nós separamos cada um
+dos possíveis algoritmos em classes separadas.
+
+https://refactoring.guru/design-patterns/strategy
+
+- Chain of responsibilities: diferente do Strategy, não se sabe qual é a
+estratégia, o algoritmo a ser aplicado. Aqui, nós temos uma corrente,
+sequência, fluxo de responsabilidades e aos poucos vemos qual delas precisa
+ser aplicada. Se uma não for aplicada, ele está ligado (tem um elo) com a
+próxima responsabilidade da cadeia, a chamará. Se ela for aplicada, deu-se
+por encerrado o assunto, senão a próxima irá chamar a próxima e assim por
+diante até chegar ao fim.
+
+É imortante aprender a diferenciar casos onde padrões semelhantes podem ser
+aplicados.
+ 
+https://refactoring.guru/design-patterns/chain-of-responsibility
+
+- Template Method: o padrão Template Method favorece o reaproveitamento de
+códigos comuns entre classes, evitando assim duplicações de códigos. A ideia
+desse padrão é que a gente tenha um método que funciona como template/modelo,
+que faça parte do processo, mas que outra parte ele delega.
+ 
+Na nossa aplicação o método calcular da classe mãe realiza parte do processo,
+mas outras partes do processo são implementadas nas classes filhas, através
+dos métodos abstratos da classe mãe que são chamados pelo método calcular.
+ 
+A funcionalidade do Template Method está em ter um algoritmo que tenha um
+processo, só que partes desse processo são iguais para todas as classes
+filhas. Então, ao invés de repetirmos essa mesma parte que é comum, a gente
+extrai esse pedaço para a classe mãe, e as partes específicas a gente delega,
+faz a chamada para um método abstrato que vai estar implementado dentro de
+cada uma das classes filhas.
+
+Repetição de código é problemática.
+
+https://refactoring.guru/design-patterns/template-method
+
+- State: similar ao Strategy, é utilizado quaando temos uma transição de estado
+ou quando a gente precisa aplicar alguma regra ou algoritmo baseado no estado
+de algum objeto.
+ 
+É possível que um objeto se comporte de formas diferentes, dependendo do seu
+estado e, se o resultado de uma chamada de método depende do estado, podemos
+delegar esta ação para uma classe específica do estado atual.
+ 
+https://refactoring.guru/design-patterns/state
+
+- Command: quando temos o padrão Command, temos várias classes com um método em comum
+e é um método para executar alguma lógica. A utilização desse padrão envolveria
+uma interface onde a lógica de comando estaria isolada. Várias classes iriam 
+implementar essa lógica e uma delas seria para gerenciar os comandos que precisam
+ser executadas em alguma situação. Aí utilizaríamos cada uma dessas classes
+nos referenciando pela interface, aproveitando o polimorfismo, e chamaríamos
+uma a uma para executarem. Sem sabermos o que cada uma delas faria, só sabendo
+que elas possuem um comando a ser executado, chamando a interface comum.
+
+Existe uma variação desse padrão chamada Command Handlers(muito utilizado no padrão
+de arquitetura Domain Driven Design), cujo intuito é separar a parte dos dados. A 
+ideia seria separar em duas classes: uma apenas para representar os dados que são 
+necessários para o comando e outra classe só para executar de fato o comando.
+
+Um caso de uso em nossa aplicação pode ter várias ações (salvar no banco, enviar 
+e-mail, etc). Este caso de uso deve ser extraído para uma classe específica, ao 
+invés de estar no arquivo da CLI, controller ou algo do tipo. Commando é justamente
+a técnica de extração do caso de uso para uma classe específica.
+
+https://refactoring.guru/design-patterns/command
+
+- Observer: a implementação de todas as tarefas de um caso de uso da aplicação na 
+mesma classe pode trazer problemas:
+
+Dificuldade de manutenção;
+Classes muito grandes e difíceis de ler;
+Problemas quando precisar alterar a implementação de uma das tarefas.
+
+É mais interessante separar cada ação em uma classe separada
+
+O padrão Observer permite ligar um evento ocorrido a suas ações.
+https://refactoring.guru/design-patterns/observer
+
+Domain Driven Design
+Clean Architecture
