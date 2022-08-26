@@ -1,0 +1,94 @@
+TDD
+
+Desenvolvimento orientado a testes. Nele, inverte-se o processo de 
+estruturação de uma aplicação. Normalmente, ao criar uma aplicação, fazemos sua
+implementação para só depois realizar os devidos testes. Nesse caso, começamos
+pelo teste, escrevendo o teste automatizado, para depois escrever o código.
+
+O objetivo é deixar com que o teste guie o resto do desenvolvimento. A partir do 
+teste, construímos o resto da aplicação, como uma espécie de rascunho. À medida
+que estamos escrevendo o teste, vamos escrevendo o resto da aplicação.
+
+Testes -> Implementação
+     ^	     /
+      \     V
+    Refatoração 
+(prática de melhorar um código existente)
+
+As vantagens dos testes automatizados está justamante no fato de eles serem
+automatizados. Além disso, por ser realizado por um código em uma máquina, ele gera
+um feedback muito mais rápido do que em um caso de teste manual, por exemplo. 
+
+Ele também traz mais segurança de mexer no código, mesmo que de outras pessoas, em
+gerar algum tipo de impacto e favorece a melhoria no código (refactoring).
+
+É uma prática recomendada e muito utilizada por muitas empresas. 
+
+Um teste automatizado nada mais é do que uma classe, um código que vai testar nosso
+código. Porém, nem todos eles são produtivos, coesos e ágil em termos de tempo
+de produção. Nesse caso, é interessante utilizar uma biblioteca específica para
+isso.
+
+Vantagens:
+
+- Código já foi testado ao final da aplicação;
+- Evita testes "viciados" na implementação (escrever um teste pensando na 
+implementação que foi escrita e acaba limitando o teste - má prática);
+- Refatoração faz parte do processo (é necessário quando um código está mal 
+escrito);
+- Ajuda a manter o foco;
+- Temos a tendência a escrever códigos mais simples;
+
+Quando utilizar? O ideal é usar utilizar quando formos implementar uma
+funcionalidade complexa e que ainda gera um pouco de confusão.
+
+JUnit
+
+JUnit é a principal biblioteca em Java para escrever testes de unidade, cujo 
+objetivo é resolver um problema, para simplificar a escrita, execução e análise de 
+testes em Java. Seu foco está em realizar testes de unidade.
+
+Além de ser a principal, é a biblioteca padrão para escrita de testes automatizados,
+independente do tipo de teste. Foi criada em 1995 por Erich Gamma e Kent Beck.
+
+Ele é gratuito e open-source. 
+
+https://github.com/junit-team/junit5
+
+- BeforeEach: recurso do JUnit que permite chamar um método antes dos métodos
+testes. Basta escrever a anotação @BeforeEach. É uma maneira de refatorar códigos
+duplicados.
+- AfterEach: da mesma maneira, existe a anotação @AfterEach caso queiramos chamar
+algum método após os métodos de teste.
+
+- BeforeAll: permite chamar um método apenas uma vez antes de chamar todos os 
+outros métodos.
+- AfterAll: faz o mesmo processo, porém após o outros métodos. Esses dois métodos
+precisam ser estáticos.
+
+Como testar um método privado? 
+
+Métodos privados não devem ser testados. Isso é má prática. Eles são usados 
+internamentes pela classe. É mais prático chamá-lo através de outro método e então
+testar esse outro método, que é público.
+
+O que deve ser testado em uma aplicação?
+
+Nem todas as classes precisam ser testadas. E nem todos os métodos. Isso é
+improdutivo e desnecessário. Porque nem tudo faz sentido ser testado. Por exemplo:
+getters e setters não precisam ser testados, construtores também não precisam. Eles
+não têm complexidade, variação, regra de negócios e não mudam com frequência. A 
+ideia, num projeto, é testar classes com regras de negócios, validações, cálculos,
+algoritmos e coisas que tendem a mudar com frequência, que tendem a sofrer várias
+alterações. Toda vez que uma classe é modificada, ela corre risco de sofrer 
+erros graves.
+
+Refatoração
+
+Da mesma maneira como é importante refatorar o código da implementação, também
+é importante refatorar o código de teste. Trata-se de uma boa prática da 
+programação. Afinal, o código também é um teste e também tem que ser manutenível.
+Quando mais simples, mais fácil de ler e mais fácil de dar manutenção, melhor,
+pois menos tempo será gasto com isso.
+
+

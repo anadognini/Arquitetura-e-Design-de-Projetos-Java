@@ -1,0 +1,85 @@
+Nesse treinamento iremos focar em padrões estruturais:
+
+Adapter
+Decorator
+Composite
+Facade
+Proxy
+
+- Adapter: é um dos padrões de projeto cujo objetivo é fazer uma adaptação. Quando 
+precisamos utilizar código legado ou código de componentes externos em nosso 
+sistema, é muito comum não ter a interface (métodos públicos) batendo com o que a 
+gente precisa, então nesses casos nós criamos adapters.
+
+Adapter is a structural design pattern that allows objects with incompatible 
+interfaces to collaborate. An adapter is a special object that converts the 
+interface of one object so that another object can understand it. 
+
+An adapter wraps one of the objects to hide the complexity of conversion happening 
+behind the scenes. The wrapped object isn’t even aware of the adapter. 
+
+Adapters can not only convert data into various formats but can also help objects 
+with different interfaces collaborate. Here’s how it works:
+
+1. The adapter gets an interface, compatible with one of the existing objects.
+2. Using this interface, the existing object can safely call the adapter’s methods.
+3. Upon receiving a call, the adapter passes the request to the second object, but 
+in a format and order that the second object expects.
+
+This implementation uses the object composition principle: the adapter implements 
+the interface of one object and wraps the other one. It can be implemented in all 
+popular programming languages.
+
+Detalhes de infraestrutura devem ser abstraídos através de interfaces.
+
+https://refactoring.guru/design-patterns/adapter
+
+- Decorator: é possível adicionar comportamento a classes em tempo de execução, 
+através do padrão Decorator.
+
+Possui alguns detalhes importantes a serem observados, como o fato do Decorator 
+precisar possuir a mesma interface do objeto que ele está decorando.
+
+https://refactoring.guru/design-patterns/decorator
+
+- Facade: em determinados casos, nós podemos precisar de um acesso simplificado a 
+uma parte complexa ou grande do nosso sistema, como autenticação, acesso a sistema 
+de arquivos, cache, etc. Uma classe de fachada, contendo apenas a funcionalidade 
+desejada, pode ser bastante útil.
+
+Podemos pegar um sub-sistema e expor parte de suas funcionalidades através de uma 
+classe. Assim, a classe responsável por ser essa fachada implementa o padrão 
+Facade.
+
+// Sem o padrão Facade	
+		Conta minhaConta = new Conta();
+		Conta outra = new Conta();
+		
+		BigDecimal valorTransferencia = new BigDecimal("100");
+		
+		Transferência transferencia = new Transferencia();
+		transferencia.validarConta(minhaConta);
+		transferencia.validarConta(outra);
+		
+		transferencia.checarSaldo(minhaConta, valorTransferencia);
+		
+		transferencia.executar(minhaConta, outra, valorTransferencia);
+		
+	// Com o padrão Facade
+		Conta minhaConta = new Conta();
+		Conta outra = new Conta();
+		
+		BigDecimal valorTransferencia = new BigDecimal("100");
+		
+		Transferência transferencia = new Transferencia();
+		transferencia.executar(minhaConta, outraConta, valorTransferencia); --> Esse método está atuando como uma fachada,
+			escondendo detalhes internos, pode ser da própria classe ou de outras classes. Normalmente o padrão facade é
+			usado quando a aplicação envolve detalhes de outras classes. Por exemplo: temos uma classe A, B e C e não
+			queremos expor seus detalhes para o cliente. A solução é encapsular em um detalhe menor, em uma única chamada
+			de método.
+
+https://refactoring.guru/design-patterns/facade
+
+- Proxy: Performance e segurança
+
+https://refactoring.guru/design-patterns/proxy

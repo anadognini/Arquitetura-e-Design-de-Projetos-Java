@@ -1,0 +1,96 @@
+Pirâmides de Testes
+
+Os testes automatizados são muito importantes dentro dos nossos sistemas e 
+precisamos encontrar, inclusive, uma maneira de fazer com que esses testes 
+automatizados sejam rodados sempre.
+
+Quais os diferentes tipos de testes automatizados que existem e as características
+de cada um deles?
+
+Testes Manuais
+e2e
+integration
+unit
+
+Essa pirâmide de testes mostra como deveria ser a organizaçao, a disposição desses
+testes em um sistema.
+
+Na base da pirâmide, temos os Unit test, que devem formar a maior quantidade dos 
+nossos testes, ou seja, os testes de unidade. E o que é um teste de unidade? Esse
+conceito envolve testar a menor unidade possível no nosso sistema. Isso normalmente
+é o teste de um método público em uma classe específica. Isso é identificado como
+a menor unidade possível e os testes de um método, de uma classe, normalmente
+são conhecidos como testes de unidade. Mas há casos em que, segundo algumas 
+literaturas, também são considerados testes de unidades um conjunto de classes,
+desde que eles não saiam do código ou vão para uma classe externa. 
+
+Basicamente, o conceito é: um teste de unidade é um teste que verifica o 
+funcionamento da menor uniadade possível, da menor unidade testável de um sistema.
+
+Quando falamos de orientação a objetos, uma classe possui várias dependências. 
+Então, se quisermos realizar testes nesta classe, nós precisamos de todas as 
+dependências dela, ou seja: precisa ter acesso às classes das quais ela depende.
+Só que existem algumas técnicas para desenvolver testes de unidade, que são 
+chamados de "Dublês de teste" e consiste em criarmos, de alguma forma, uma 
+instância que a classe que está sendo testada vai reconhecer essas dependências,
+mas que não são as classes reais, são classes controladas e cujo comportamento
+já é previsto, para não afetar o resutado do teste.
+
+Em seguida vem os testes de integração. Se duas partes que se comunicam no meu
+sistema, vale a pena testá-las separadamente? A integração entre essas duas partes
+do sistema pode ser falha. 
+
+Então, o que é um teste de integração? Normalmente, são os testes em que utilizamos
+mais de uma classe completa, mais de uma classe real, ou seja: uma funcionalidade
+completa. 
+
+Porém, é mais comumente conhecido como teste de integração, um teste que realiza 
+persistência no banco de dados, que chama alguma API externa, que tenta enviar 
+e-mails... Ou seja: os testes de integração mais conhecidos combinam a 
+funcionalidade do código com algum sistema externo e que envolvam a integração 
+entre essas duas partes.
+
+A menor parte desses testes deve ser composta pelos testes de interface, de ponta a
+ponta. Do que se trata um teste de ponta a ponta? Nada mais é do que testar o 
+sistema real em funcionamento. Se falamos de um sistema web, isso significa abrir
+o navegador, clicar nos botões, preencher formulários, abrir uma janela, etc.
+Se for um teste de um aplicativo, isso representa rodá-lo num emulador. E após 
+isso, verificar se o resultado é esperado.
+
+Esses testes são realizados em um ambiente controlado, seja em um banco de dados
+de teste, em um servidor mais leve, algo assim.
+
+E, por fim, temos os testes manuais, que devem fazer parte da nossa aplicação sim, 
+mas não são considerados testes automatizados.
+
+Quanto mais na base da pirâmidade o tipo de teste, mais rápido e eficaz ele é. E
+quanto mais próximo da ponta, mais desastroso ele é, pois exige mais recursos
+e pode quebrar facilmente.
+
+Isso é como deveria ser. Mas infelizmente, não é essa a realidade. Na prática, 
+o tipo de teste mais comum de ser aplicado são os testes manuais. Algo que deveria
+ser apenas pontual e para funcionalidades específicas, na verdade acontece mais
+comumente. Para verificar o funcionamento do teste, as equipes precisam verificar
+manualmente o sistema inteiro. Isso é demorado e custoso.
+
+Existem muitos testes automatizados de ponta a ponta, alguns de integração e quase
+nenhum de unidade. Isso é muito comum, especialmente em sistemas legado, que 
+muitas vezes não seguem boas práticas de escrita. O primeiro passo num caso como
+esse seria conversar com a equipe de desenvolvimento para melhorar e refatorar
+esse código. Então, os testes de unidades seriam mais fáceis de ser criados.
+
+O que mais estudar?
+
+- Testes de perfomance: são muito importantes. O que seria um teste de performance?
+Basicamente, utiliza uma ferramenta que tenta acessar uma URL e se essa URL 
+demorar mais de 1 segundo para responder, o teste está falhando. Ou o mesmo, só
+que tentando acessar um banco de dados. 
+- Testes de mutação: trata-se de uma técnica muito simples e muito fácil, que pode
+poupar o desenvolvedor de muito tempo tentando resolver problemas. Quando realizamos
+um teste de unidade, podemos achar que nossa aplicação está ótima como está. Porém,
+se introduzirmos um bug a essa aplicação e o teste continuar funcionando, isso
+significa que ele não está sendo eficaz. Existem diversas ferramentas que fazem
+esse tipo de tarefa.
+- BDD: surgiu como uma crítica ao TDD. O objetivo é criar os códigos e os teste
+pensando no comportamento final da aplicação e como a aplicação deveria funcionar,
+escrito com uma sintaxe e uma linguagem que qualquer um conseguiria entender.
