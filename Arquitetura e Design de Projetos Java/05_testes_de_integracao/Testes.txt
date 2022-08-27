@@ -1,0 +1,55 @@
+Testes de integração
+
+Nesse curso, o objetivo é abordar classes que fazem integração com serviços 
+externos, sejam elas APIs externas, bancos de dados (SQL), outros módulos das 
+aplicações.
+
+Classes DAO (Data Access Object): fazem acesso ao banco de dados. Muito recomendada
+no mundo Java. Aprender a deixar os códigos dessas classes fáceis de serem 
+testados.
+
+E como fazer para implementar o código de teste.
+
+Tipos de Testes de Integração
+
+- Integração com o banco de dados
+- Integração com API externa
+- Integração com outros módulos
+- Integração com serviços de mensageria
+
+https://caelum-online-public.s3.amazonaws.com/2061-Testes-de-Integra%C3%A7%C3%A3o-Testes-de-SQL-e-DAOs-automatizados-em-Java/Transcri%C3%A7%C3%A3o/Piramide_de_Testes.png
+
+Os testes de integração, idealmente, deveriam ser escritos em menor proporção do 
+que os testes de unidade. Testes de integração tem um tempo de execução maior do 
+que os testes de unidade e costumam ser mais difíceis de escrever e manter, por 
+conta da complexidade maior.
+
+https://martinfowler.com/articles/practical-test-pyramid.html
+
+Test Data Builder
+
+Eventualmente, em várias classes de teste é preciso fazer uso das mesmas entidades, 
+dos mesmo objetos, e se isso for extraído para métodos, teremos métodos duplicados 
+entre as várias classes. A ideia é extrair isso para uma classe separada. Já que
+podemos reaproveitar em várias classes, nós extraímos isso para uma classe 
+separada.
+
+E como estamos falando de criação, construção de objetos, o padrão de projeto que 
+o começou a ser adotado na escrita de testes, é o builder, é aquele padrão do 
+design pattern, do GoF e está na categoria de criacional, que usamos para 
+abstrair, para simplificar a criação de objetos complexos, que tem vários 
+métodos, vários atributos e várias informações.
+
+Quando o usamos no teste, o chamamos a isso de teste Data Builder, então temos um 
+builder de dados para os testes. Isso acabou virando um padrão na escrita de testes
+automatizados. Criar classes que funcionam como testes Data Builder. Então são 
+classes que seguem um padrão builder para construir algum objeto, fornecendo dados 
+para os seus testes, esse que é o objetivo. 
+
+Como implementar um teste Data Builder:
+
+Instanciamos um objeto builder (seilaBuilder) da classe que queremos testar, com
+encadeamento de seus métodos. Com isso, o método de teste fica bem legível e todos 
+os testes em que é preciso testar a classe, ao invés de instanciar a classe na 
+mão, é só chamar o builder, passar as informações e o builder vai construindo esse 
+objeto. Então esse é o padrão teste Data Builder.
