@@ -1,0 +1,79 @@
+Testes de aceitação é o mesmo que testes de ponta a ponta (e2e, UI). São testes que
+simulam o usuário utilizando a aplicação. São mais difíceis de escrever e, portanto,
+estão mais próximos da ponta da pirâmide. São também mais caros e lentos.
+
+Para Java, existem diversas ferramentas que auxiliam na escrita desses testes: 
+JUnit (principal em termos de testes de unidade), cucumber, mockitos, dbUnit, 
+selenium.
+
+Selenium trata-se de uma biblioteca open source gratuita para testes end-to-end, 
+nascida em 2004, como um projeto da comunidade, bastante utilizado. A partir dele,
+surgiram subprojetos com intuitos específicos, como o Selenium RC e o Selenium
+WebDriver. Possui suporte para diversas linguagens, incluindo Java, Python, PHP.
+
+Selenium WebDriver
+
+Surgiu em 2006/2007 focado na parte de escrever um teste utilizando linguagem de 
+programação. Assim, podemos escrever um script que vai fazer a integração com o
+Selenium que tem a abstração do protocolo de comunicação com o browser. Ele possui
+suporte para vários browsers, além disso fornece uma API muito simples de usar
+e entender.
+
+Alguns métodos:
+
+- É possível recuperar elementos na página utilizando o método findElement();
+- É possível recuperar o código fonte da página utilizando o método getPageSource();
+- É possível recuperar o url atual do browser utilizando o método getCurrentUrl();
+- Devemos utilizar o método sendKeys() para enviar textos para os inputs da página;
+- Uma das maneiras de submeter um formulário é via método submit().
+
+Page Object
+
+Um problema que os times de desenvolvimento passaram quando começaram a trabalhar 
+no desenvolvimento de diversos testes E2E utilizando o Selenium era: como extrair 
+esse código e separá-lo?
+
+Criou-se então um padrão que hoje é uma recomendação do próprio Selenium: os Page 
+Objects, que servem para melhorar a legibilidade do código e facilitar a manutenção.
+Na documentação do Selenium, é possível encontrar uma página de diretrizes e 
+recomendações. Nela encontramos mais informações sobre esse padrão de projetos que 
+visa separar as responsabilidades no projeto, isolando a API do Selenium, citando 
+problemas e exemplificando os usos dos Page Objects.
+
+https://www.selenium.dev/documentation/test_practices/encouraged/
+
+Lembre-se que os testes de UI ficam no topo da pirâmide de testes, e que devemos 
+reduzir ao máximo a sua quantidade, já que são difíceis de escrever, lentos de 
+executar e mais caros de manter.
+
+Um Page Object nada mais é do que uma classe que representa uma página. Por exemplo:
+se tivermos uma página de logins, todo o acesso e manipulação à página de logins 
+fica dentro dessa classe a qual chamaremos de LoginPage.
+
+Tudo que for da API do Selenium deve ficar nas Page Objects e tudo o que for da
+API do JUnit deve ficar dentro da classe de teste.
+
+Ao utilizar o padrão Page Object favorecemos a separação de responsabilidades entre
+os códigos de testes e de utilização da API do Selenium WebDriver e reduz bastante 
+a verbosidade dos códigos de testes, os tornando mais legíveis.
+
+Observações
+
+O método abaixo indica que o Selenium deve aguardar um determinado período de tempo
+(no caso abaixo, 10 minutos) antes de buscar algum elemento na página:
+
+this.browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+Web Requisições assíncronas, AJAX, JavaScripts, podem deixar a página testada mais 
+pesada. Nesses caso, os testes podem falhar pela lentidão. Portanto, é legal indicar
+um tempo de espera para o Selenium.
+
+Caso o elemento não seja encontrado nesse período de tempo, o Selenium irá lançar
+um erro.
+
+O método abaixo indica que o Selenium deve esperar um período de tempo para carregar
+uma página:
+
+timeouts().pageLoadTimeout(5, TimeUnit.SECONDS)
+
+Caso contrário, ocorrerá um erro também.
