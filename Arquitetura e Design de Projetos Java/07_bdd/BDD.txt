@@ -1,0 +1,104 @@
+O que é BDD? Como ele se encaixa no universo de testes e no processo ágil? Quais são
+as vantanges de usar? Como se usa? O que são Cucumber e Gherkin?
+
+BDD é Behavior Driven Development 
+
+Considerando-se que falhas são humanas e que ocorrem, eventualmente, em qualquer 
+momento de comunicação, por maior que seja nosso cuidado, o BDD surgiu como um
+processo que visa diminuir a quantidade dessas falhas.
+
+Vamos supor um cliente, que sabe quais funcionalidades deseja em sua aplicação, 
+precisa passar essas informações para o Analista de negócio (aquele que refina e
+divide as funcionalidades em stories, criar um diagrama de caso de uso). Após isso,
+ele passa isso para os desenvolvedores, que irão implementar as funcionalidades com
+as ferramentas devidas. Por fim, os QA criam critérios de aceitação e executam os testes
+para validar se as ideias iniciais realmente foram implementadas.
+
+Entre todos esse processos há uma etapa de comunicação.
+
+Cliente (Negócio) -> Analista -> Desenvolvedores -> QA
+
+O processo ocorre como? 
+
+Descobrir
+Formalizar
+Automatizar
+Validar
+
+Primeiro, o time inteiro deve se reunir, principalmente no início, para criar um
+conhecimento comum, esclarecer dúvidas existentes relacionadas com qualquer 
+funcionalidade. O resultado disso é a segunda etapa do processo, a de formalização,
+onde é criado um documento que descreve os critérios de aceitação, de uma maneira
+que possa ser entendido por todos (com uma linguagem de negócio).
+
+Tendo isso, as funcionalidades são transcritas em forma de código, baseado nos
+critérios de aceitação. É aqui que entram Cucumber, Gherkin, TDD.
+
+Por fim, deve-se validar tudo isso através do cliente e do analista de negócio e, se
+for preciso, repetir o processo.
+
+O BDD se diferencia de maneira que os critérios de aceitação normalmente são 
+definidos desde o início do processo, na primeira sprint. O resto é consequência.
+São ferramentas como o Cucumber que estruturam e facilitam a implementação da 
+aplicação.
+
+Cucumber
+
+Um arquivo .feature pode ter vários cenários e passos (steps). Os métodos associados
+aos passos são reaproveitados entre cenários podemos passar parâmetros do cenário 
+ao método.
+ 
+O cucumber possui anotações para inicializar (@Before) e finalizar (@After) o 
+cenários. Os métodos anotados com @Before e @After são chamados de Hooks.
+ 
+Também existem os hooks @BeforeStep e @AfterStep. Como o nome já indica, nessas 
+anotações o evento é a execução de um step. Ou seja, cada vez que um métodos anotado
+com @Dado @Quando ou @Entao é chamado, será chamado o hook (antes ou depois, 
+dependendo da anotação).
+ 
+Em geral, vale a pena alertar que devemos ter cuidado com o uso de hooks pois esses 
+métodos não ficam visíveis para quem lê apenas o arquivo .feature.
+
+Testes de UI devem ser criados em menor quantidade que testes de unidade.
+
+O feijão com arroz do uso do Selenium WebDriver compreende descobrir a melhor 
+estratégia de captura de um elemento HTML que se deseja interagir e usar a classe 
+By para criar objetos do tipo WebElement através do método findElement().
+
+Mudanças no HTML são constantes e necessárias. A aplicação web deve evoluir à 
+medida que clientes e usuários aumentam seu entendimento sobre suas demandas. Por 
+isso é necessário escrever código de teste que minimize o impacto dessas mudanças e
+o padrão Page Object existe para cumprir esse objetivo, servindo para encapsular o 
+acesso a uma pagina da aplicação.
+
+Além disso, não devemos usar Selenium diretamente nas classe de "steps" do Cucumber.
+O teste, mesmo com Selenium, deve sempre começar a partir de estado "limpo"
+
+Tags podemos ser escolhidas pela anotação @CucumberOptions ou na linha de comando. 
+
+Um contexto no arquivo feature define um passo comum entre todos os cenários dessa 
+funcionalidade.
+
+String no Cucumber
+
+O dado <nomeUsuario> é uma String. Com String estamos acostumados a colocar aspas 
+duplas, mas nesse caso não pode, porque as aspas duplas significam String com valor 
+literal. Com isso eu receberia <nomeUsuario>, dentro do código, e isso eu não quero.
+
+É uma String, mas que vem da tabela abaixo. Então você coloca aspas simples, essa é 
+a sintaxe do Gherkin. Então fica Dado um lance invalido de <valor> reais e do 
+usuário ‘<nomeUsuario>’. E aí sim ele vai passar o Beltrano como String e o Cigano 
+como String, desde que eu ajuste meu método.
+
+DataTable
+
+Esquema do Cenario: Propondo um lance invalido
+	Dado um lance invalido de <valor> reais e do usuario '<nomeUsuario>'
+	Quando propoe o lance
+	Entao o lance nao e aceito
+	
+Exemplos:
+    | valor  |  nomeUsuario |
+    |   0.0  |   beltrano   |
+    |  -1.0  |	 fulano     |
+    | -100.0 |	 sicrano    |
