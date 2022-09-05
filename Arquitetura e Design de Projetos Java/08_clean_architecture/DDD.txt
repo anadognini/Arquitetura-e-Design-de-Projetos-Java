@@ -1,0 +1,5 @@
+O conceito de modelarmos a nossa aplicação pensando primeiramente no domínio é 
+chamado de Domain Driven Design, ou design orientado a domínio.
+
+Munidos desta mentalidade, podemos garantir uma melhor manutenibilidade e 
+extensibilidade de nosso projeto.

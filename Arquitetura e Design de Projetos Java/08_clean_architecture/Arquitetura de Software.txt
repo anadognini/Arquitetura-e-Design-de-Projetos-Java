@@ -1,0 +1,91 @@
+Design de Código X Arquitetura de Software
+
+Definição genérica
+
+Design de código: design orientado a objetos é a disciplina de definir os objetos e 
+suas interações para resolver um problema que foi identificado e documentado durante
+a análise orientada a objetos.
+
+Arquitetura de software: a arquitetura de software de um sistema consiste na 
+definição dos componentes do software, suas propriedades externas e seus 
+relacionamentos com outros softwares. 
+
+Fazendo uma analogia: um arquiteto faz a planta da casa, determina a estrutura do 
+espaço como um todo, já o designer de interiores define como os móveis vão estar 
+alocados, como vai ser a iluminação, que tipo de material usar em cada parte, como 
+harmonizar a decoração. É possível perceber que existe uma semelhança.
+
+Para a tecnologia da informação, a arquitetura de software diz respeito a essa
+parte de mais alto nível do desenvolvimento do software, como os pacotes, as páginas
+e etc. serão organizados. Existem vários ramos da arquitetura de software: clean
+architectura, onion architecture, arquitetura hexagonal etc. É uma visão de alto 
+nível de como o sistema vai ser modelado. Na prática, é como os componentes do 
+software são organizados para que ele seja, de maneira mais fácil, manutenível. É 
+um conceito extremamente amplo de estudo.
+
+Em tratando-se de código por si próprio (por exemplo: como uma classe se relaciona
+com outra e se existe acoplamento forte entre ambas) isso é design de código. Isto
+condiz com outras áreas de estudos: princípios da POO, SOLID, DDD (Domain Driven
+Design), design patterns. Esses detalhes estão mais relacionados com uma visão
+mais de baixo nível do software, do código em si. Quais padrões devem ser aplicados.
+
+Em resumo: arquiteturo é alto nível, e design é mais baixo nível.
+
+Design de código se comunica diretamente com um nível mais abaixo que é a 
+implementação e a forma como o código está escrito.
+
+Um modelo clássico de Arquitetura de Software é o MVC (model, view, controller),
+mesmo tendo fugido um pouco de seu conceito original. O controller tem como função
+somente organizar o fluxo da aplicação, recebendo uma requisição, organizando o 
+fluxo, chamando as classes necessárias para realizar as regras de negócio e 
+persistência, recebe essa resposta e entrega para a view. A view é a maneira como
+essa resposta vai ser mostrada para o usuário. Entre as duas, fica a camada 
+model. 
+
+Mas qual a função da model? Persistência e regras de negócio. Porém, não faz sentido
+que todas as regras de negócio caibam exclusivamente ao model. 
+
+Portanto, o MVC não é mais um padrão arquitetural completo, na prática isso é só
+uma forma de organizar uma aplicação web. Pois existe uma parte inteira da aplicação
+que não tem uma definição exata. 
+
+Um controller é definido por uma única classe, uma view é definida por um único 
+arquivo html. Mas a model pode ter várias classes, se necessárias.
+
+Então como organizar tudo isso? Existem diversos padrões arquiteturais. Um deles
+é o padrão de Clean Architecture.
+
+Clean Architecture 
+
+Aqui, nós temos camadas ainda mais bem definidas do que no modelo MVC. 
+
+- Entidades: é o núcleo da aplicação, a camada mais interna, que todas as outras 
+camadas podem ver, mas que se mantém isolada, sem conversar com ninguém. Uma 
+entidade é um tipo de classe que possui alguma identidade. Por exemplo: uma pessoa
+precisa ter algum tipo de identificação única. E tudo que possui uma identidade
+é uma entidade. É nelas que ficam as regras de negócio da aplicação e elas não podem
+ser acessadas diretamente, pois isso pode gerar código repetido. Para existe
+a próxima camada:
+
+- Use cases: nada mais é do que uma classe que organiza o fluxo das regras de 
+negócios. Aquilo que no MVC, seria realizado pelo controller. Aqui neste caso, a 
+responsabilidade é passada para uma classe que não depende da web. Então um
+use case pode ser chamado através de um controller, através de um comando,
+através de uma requisição, de qualquer forma. 
+
+- Infraestrutura: controllers, adaptador de interface, detalhes de framework... São
+as camadas mais externas da aplicação. Essa camada tem como responsabilidade pegar
+o mundo externo, seja a web, banco de dados, qualquer dado de infraestrutura, e 
+trazer para uma forma que o use case vai entender. 
+
+- A camada mais externa só tem detalhes de infraestrutura. A web em si, 
+interface como usuário, qualquer interface externa que possa acessar a api.
+
+A web, por ser a camada mais externa, tem acesso às camadas mais internas, porém
+a camada de entidade não deve conhecer o banco de dados, pois dessa forma um
+conceito de negócio estaria dependente de um detalhe de infraestrutura. 
+
+O fluxo ocorre da seguinte maneira: a web se comunica com o controller -> o 
+controller se comunica com o use case -> o use case se comunica com as entidades.
+
+É onde a clean architecture falha que entram outros padrões arquiteturais. 

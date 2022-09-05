@@ -1,0 +1,128 @@
+Arquitetura de Software
+
+https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=513807
+
+A definição de arquitetura de software é muito ampla e subjetiva, sendo que na 
+literatura encontramos muitos autores com diferentes pontos de vistas, opiniões
+definições sobre o tema. Cada pessoa que trabalha com desenvolvimento, com 
+arquitetura de software, pode ter uma visão diferente, pode ter opiniões e pontos 
+de vista baseados em experiência. E todas elas podem estar corretas, não existe uma 
+única definição correta.
+
+Tem uma que é um padrão do IEEE, o 1471-2000, que fala que a arquitetura pode ser 
+definida como aquelas práticas e fundamentos de como você organiza um sistema, em 
+relação aos seus componentes, a relação entre eles, questão de ambientes e como 
+vai ser gerenciado o design e a evolução desse software em relação ao código. 
+
+Já Barry Boehm, em seu livro de arquitetura de software, define que ela é composta 
+por um conjunto de regras, digamos assim. Ele fala que é a coleção dos componentes 
+do software, como eles estão relacionados, quais são as restrições entre eles. Fala 
+que também tem a ver com os requisitos de negócios dos stakeholders, dos 
+patrocinadores, os clientes do software. E também faz parte disso como conseguimos 
+demonstrar que se esses componentes e essas relações entre eles foram implementados,
+como eles vão atender a esses requisitos de negócio.
+
+As duas definições dizem respeito a componentes, estruturas de código, 
+relacionamentos entre eles, como que uma parte do código afeta outra parte do 
+código, e também a requisitos de negócio (como que o software e sua arquitetura
+consegue suportar os requisitos de negócio da aplicação).
+
+Os pontos que serão abordados nesse curso são:
+
+- Componentes do software e suas relações (aqui entra o código em si, as
+bibliotecas utilizadas, os frameworks, a maneira como eles se relacionam, se existe
+dependência);
+
+- Infraestrutura do código (os sistemas operacionais envolvidos, banco de dados,
+hardware, pois tudo isso afeta diretamente o comportamento da aplicação);
+
+- Estrutura e design de código;
+
+- Requisitos de negócio (isso está ligado diretamente às funcionalides da aplicação,
+pois a arquitetura tem que prover e atender diretamente a essas regras de negócio);
+
+- Favorecer a evolução do código (o software deve ser manutenível, favorecer 
+ajustes, adaptações, novas funcionalidades, simples de evoluir);
+
+- Requisitos não funcionais do software (performance, escalabilidade, 
+confiabilidade, segurança, disponibillidade, quais são os padrões, tecnologias
+que devem ser aplicados, manutenibilidade, extensibilidade). 
+
+Existem diversos modelos de arquitetura no mercado e cada uma tem suas vantagens e 
+desvantagens. O mais utilizado é o modelo em camadas, que separa a aplicação em três
+camadas: a de interação com o usuário, a camada de negócio e a camada de 
+persistência de dados. Um exemplo é o MVC.
+
+Porém, existem outros, como o modelo Onion Architecture: a ideia é centralizar 
+toda a parte de domínio, de regras de negócio, de lógica. Ao redor, fica a 
+camada de serviços da aplicação em si. A camada mais externa inclui outras partes,
+que não tem relação direto com o domínio, mas ainda assim essenciais, como a 
+interface do usuário.  
+
+Arquitetura hexagonal: a ideia é similar, com o domínio da aplicação no centro e
+em volta toda a parte de infraestrutura, como integração com banco de dados, tela,
+integração com outros serviços. A comunicação entre esses serviços externos e a
+aplicação é feita através de adaptadores. Esse modelo também é conhecido como portas
+e adaptadores, havendo portas de entrada para a aplicação e adaptadores que fazem
+essa conversão. 
+
+Clean Architecture
+
+Nada mais é do que um modelo de arquitetura, de como o código, os componentes, as
+estruturas, bibliotecas, frameworks... serão montados.
+
+A ideia do Clean Architecture é parecida com a de outros modelos, estando o domínio
+centralizado numa camada chamada de entidades, onde estão todas as regras de negócio
+da aplicação. 
+
+Externamente a essa primeira camada, existe uma camada chamada Use cases que 
+determinam onde ficam os casos de uso da aplicação, ou seja, a lógica de controle 
+de fluxo e como serão executadas as regras de negócio da aplicação. 
+
+Por fora, tem uma camada de adaptadores (controllers, por exemplo), que conversam 
+com a parte externa.
+
+E na última camada fica a parte de web, a parte de banco de dados, de serviços, de
+infraestrutura. Para ela se comunicar com a aplicação, com os Use cases que irão
+interagir com o domínio, ela precisa de adaptadores.
+
+Esse modelo foi criado por Robert Cecil Martin, tratando-se de uma consolidação
+de outros modelos arquiteturais. O grande foco é separar o domínio da aplicação do
+restante.
+
+Características principais:
+
+- Isolar o código de domínio da aplicação;
+- Inversão de dependências: aqui, não é funcão do domínio se comunicar com as 
+dependências, são elas que devem interagir com o domínio. Em Java, isso pode ser
+aplicado facilmente através do uso de interfaces; 
+- Favorece a aplicação das boas práticas da Orientação a Objetos, como baixo 
+acoplamento, alta coesão, etc.;
+- Código de domínio altamente testável;
+- Domínio independente de frameworks e detalhes de infraestrutura, permitindo
+alterações e manutenções na aplicação que não afetarão as regras de negócio e 
+evitando grandes impactos.
+
+https://refactoring.guru/pt-br/design-patterns/factory-method
+https://refactoring.guru/pt-br/design-patterns/builder
+https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html
+
+As regras de negócio devem ficar nas entidades e VOs, mas nem sempre isso faz 
+sentido. Quando precisamos executar alguma ação que não faça parte de nenhuma 
+entidade nem de um VO, podemos utilizar uma classe Service.
+
+Classes Services, Domain, Application e Infrastructure Services
+
+- Domain Services são classes que representam uma ação entre mais de uma entidade;
+
+- Application Services controlam o fluxo de alguma regra em nossa aplicação;
+
+- Infrastructure Services são implementações de interfaces presentes nas camadas de 
+domínio ou de aplicação.
+
+Os termos Use Case, Application Service e Command Handler são basicamente sinônimos 
+e servem para fornecer pontos de entrada na sua aplicação, de forma independente 
+dos mecanismos de entrega (Web, CLI, etc).
+
+Não é necessário seguir cegamente o modelo arquitetural. É interessante estudar para
+entender o que é mais adequado para cada aplicação e então aplicar.
