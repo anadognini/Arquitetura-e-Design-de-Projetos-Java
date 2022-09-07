@@ -1,0 +1,52 @@
+Domain Driven Design
+
+Originado por Eric Evans em 2004, partindo do princípio de que o desenvolvimento de 
+um software deve partir do seu domínio. 
+
+Os  principais conceitos que ajudam a deixar o código da aplicação mais próximo de
+seu domínio:
+
+- Foco no domínio, não na parte técnica;
+
+- Linguagem ubíqua, que seja compreendida facilmente por qualquer pessoa de 
+qualquer área. Isso faz bastante diferença, até para novas pessoas da equipe técnica
+tenham facilidade em entender detalhes da aplicação para solucionarem possíveis
+problemas, pois facilita muito a comunicação e evita atritos com especialistas da 
+área do domínio. Então é utilizar os termos que são usados pelos especialistas de 
+negócio e tentar trazê-los para o código do jeito mais fiel possível, os mesmos 
+termos que são falados durante as reuniões, durante as conversas;
+
+- Conceito delimitado;
+
+- Blocos de construção. Entity, Value Object, Repository, Factory e Service.
+
+https://dzone.com/articles/ddd-part-ii-ddd-building-blocks
+
+Aggregates
+
+https://martinfowler.com/bliki/DDD_Aggregate.html
+
+Contextos Delimitados
+
+Bounded Contexts, ou contextos delimitados, são um dos conceitos mais complexos de 
+entender e implementar do estudo do DDD.
+
+Com contextos bem delimitados, podemos ter equipes separadas para trabalhar em cada 
+um dos contextos e além disso eles podem até virar projetos separados, evoluindo 
+individualmente.
+
+A separação em contextos nos dá mais flexibilidade porém aumenta (e muito) a 
+complexidade. 
+
+O conceito de Mapa de Contexto também é muito importante.
+
+https://martinfowler.com/bliki/BoundedContext.html
+
+Uma das abordagens de contextos delimitados é junto ao conceito de shared kernels,
+ou seja, um núcleo compartilhado entre dois contextos separados. Ela tem suas 
+vantagens e desvantagens.
+
+É a forma mais fácil de possibilitar a comunicação entre contextos delimitados, mas 
+nos tira boa parte da flexibilidade.
+
+https://maiconheck.medium.com/domain-driven-design-os-building-blocks-parte-3-domain-subdomains-e-bounded-contexts-a51d5a9d9851
